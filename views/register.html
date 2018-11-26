@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="urf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>
+        <%= title%>
+    </title>
+    <link rel="stylesheet" href="stylesheets/bootstrap.css" media="screen">
+    <style type="text/css">
+        html,
+        body {
+            /* padding: 50px;
+            font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;*/
+            height: 100%;
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .from-container {
+            padding: 50px;
+            border-radius: 10px;
+            background: #5bc0de;
+        }
+
+        .form-width {
+            width: 50%;
+            margin: 0 auto;
+        }
+    </style>
+    <script type="text/javascript" src="javascripts/jquery.min.js"></script>
+    <script type="text/javascript" src="javascripts/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div class="from-container">
+        <!-- <form class="form-horizontal form-width" role="form" method="post" consubmit="reture false">
+            <fieldset>
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <p class="tc">注册信息</p>
+                    </div>
+                    <div class="panel-body m15">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-user"> </span>
+                                </span>
+                                <input type="text" class="form-control" id="username" name="username" placeholder="请输入用户名"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="gylphicon gylphicon-lock"></span>
+                                </span>
+                                <input type="text" class="form-control" id="password" name="password" placeholder="请输入密码"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="gylphicon gylphyicon-lock"></span>
+                                </span>
+                                <input type="text" class="form-control" id="password1" name="password1" placeholder="请再次输入密码"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-primary btn-block" id="register1">注册</button>
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="btn btn-info btn-block " id="login1">登录</button>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+        </form> -->
+
+        <form class="form-horizontal">
+            <div class="form-group">
+                <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control" id="username" placeholder="请输入用户名"">
+              </div>
+            </div>
+            <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="password" placeholder="请输入密码">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+                    <div class="col-sm-10">
+                        <input type="password" class="form-control" id="password1" placeholder="请再次输入密码">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary btn-block " id="login1">登录</button>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary btn-block" id="register1">注册</button>
+                </div>
+        </form>
+    </div>
+
+
+    <script type="text/javascript">
+        $(function () {
+            $("#login1").click(function () {
+                location.href = "login";
+            });
+            $("#register1").click(function () {
+                var username = $("#username").val();
+                var password = $("#password").val();
+                var password1 = $("#password1").val();
+
+                console.log("username-->>", username);
+                console.log("password-->>", password);
+                console.log("password1-->>", password1);
+                if (password.trim() != "" && password1.trim() != "" && password === password1) {
+                    $("#password").css('border', '1px solid black');
+                    $("#password1").css('border', '1px solid black');
+                    var data = { "uname": username, "upwd": password };
+                    console.log(data);
+                    $.ajax({
+                        url: '/register',
+                        type: 'post',
+                        data: data,
+                        success: function (data, status) {
+                            console.log('data-->>', data)
+                            // if (status == 'success') {
+                            //     location.href = 'login';
+                            // }
+                        },
+                        error: function (data, err) {
+                            console.log("err-->>", err);
+                        }
+                    });
+                } else {
+                    console.log("errr");
+                    $("#password").css('border', '1px solid red');
+                    $("#password1").css('border', '1px solid red');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
